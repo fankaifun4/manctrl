@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>相册控制台</title>
+	<link rel="stylesheet" href="">
+	<link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/style/index.css">
+	<script src="assets/libs/jquery.min.js" type="text/javascript"></script>
+	<script src="assets/libs/angular.min.js" type="text/javascript"></script>
+</head>
+<body ng-app="app">
+	<header class="header">
+		相册生成器
+	</header>
+	<section class="container-fluid" ng-controller="xcCtrl">
+		<div class="cvs-wrap">
+			<div class="cvs-container"  ng-style="canvasComputed" id="cvs-wrap">
+				<div class="bg"></div>
+				<div class="cvs-items">
+					<div 
+						class="img-items" 
+						ng-mousedown="getItem($event,item)" 
+						ng-mousemove="moveItem($event,item)"
+						ng-mouseup="removeMoveItem($event,item)"	
+						id="{{item.id}}" ng-style="item" ng-repeat="item in itemList">
+						<div class="glyphicon glyphicon-plus"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="ctrl-plan fr">
+			<div class="ctrl-heading">微调</div>
+			<div class="ctrl-body">
+			    <div class=''>
+			    	
+			    	<div class="pd-tb-5">
+			    		<div class=" btn btn-success file-bg">
+			    			插入背景图
+			    			<input type="file" class="file-opcity-0" name="">
+			    		</div>
+			    		<input type="button" value="上传" class="btn btn-primary">
+			    	</div>
+			    	<label>
+			    		计算背景宽高:
+			    	</label>
+			    	<div class="pd-tb-5">
+			    		<input type="number" class="computed-value" ng-model="canvasComputed.width" 
+			    			placeholder="宽" 
+			    			ng-change="changeSize(canvasComputed,cvsRatio)">
+			    		<input type="number" class="computed-value" ng-model="canvasComputed.height" 
+			    			placeholder="高" ng-change="changeSize(canvasComputed,cvsRatio)">
+			    		<span>比例：</span>
+			    		<input type="text" class="computed-value" readonly="" 
+			    		ng-model="cvsRatio.rotate" name="" placeholder="自动计算">
+			    	</div>
+			    	<div class="pd-tb-5">
+			    		<input type="button" ng-click="addItems()" value="添加元素" class="btn btn-success" name="">
+			    	</div>
+			    	<div class="pd-tb-5">
+			    		<label for="">设置元素宽高：</label>
+			    	</div>
+			    	<div class="pd-tb-5">
+			    		<input type="number" class="computed-value" 
+			    			placeholder="宽" 
+			    			ng-change="changeSize(currentItem,currentItem,'aspectRatio')"
+			    			ng-model="currentItem.width">
+			    		<input type="number" class="computed-value" 
+			    			placeholder="高" 
+			    			ng-change="changeSize(currentItem,currentItem,'aspectRatio')"
+			    			ng-model="currentItem.height">
+			    		<span>比例：</span>
+			    		<input type="number" class="computed-value" placeholder="自动计算" readonly=""  name="" ng-model="currentItem.aspectRatio">
+			    	</div>
+			    	<div class="pd-tb-5">
+			    		<label for="">微调元素位置：</label>
+			    	</div>
+
+			    	<div class="pd-tb-5">
+			    		<input class="btn btn-primary" type="button" value="左右+"></input>
+			    		<input type="number" ng-model="currentItem.left" 
+			    			class="computed-value" name="" readonly="">
+			    		<input class="btn btn-primary" type="button" value="左右-">
+			    	</div>
+			    	<div class="pd-tb-5">
+			    		<input class="btn btn-primary" type="button" value="上下+"></input>
+			    		<input type="number" ng-model="currentItem.top" 
+			    			class="computed-value"  name="" readonly="">
+			    		<input class="btn btn-primary" type="button" value="上下-">
+			    	</div>
+			    	<div class="pd-tb-5">
+			    		<input class="btn btn-primary" type="button" value="高度+"></input>
+			    		<input type="number" ng-model="currentItem.height" 
+			    			class="computed-value"  name="" readonly="">
+			    		<input class="btn btn-primary" type="button" value="高度-">
+			    	</div>
+			    	<div class="pd-tb-5">
+			    		<input class="btn btn-primary" type="button" value="宽度+"></input>
+			    		<input type="number" ng-model="currentItem.width" 
+			    			class="computed-value"  name="" readonly="">
+			    		<input class="btn btn-primary" type="button" value="宽度-">
+			    	</div>
+			    	<div class="pd-tb-5">
+			    		<input class="btn btn-primary" type="button" value="角度+"></input>
+			    		<input type="number" ng-model="currentItem.aspectRatio" 
+			    			class="computed-value"  name="" readonly="">
+			    		<input class="btn btn-primary" type="button" value="角度-">
+			    	</div>
+			    	<div class="pd-tb-5">
+			    		<input class="btn btn-primary" type="button" value="透明+"></input>
+			    		<input type="number" ng-model="currentItem.opcity" 
+			    			class="computed-value"  name="" readonly="">
+			    		<input class="btn btn-primary" type="button" value="透明-">
+			    	</div>
+			    </div>
+			</div>
+		</div>
+	</section>
+	<footer class="footer">
+		
+	</footer>
+</body>
+<script src="assets/js/index.js" type="text/javascript"></script>
+</html>
